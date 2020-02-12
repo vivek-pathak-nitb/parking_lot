@@ -37,7 +37,7 @@ public class ParkingManager {
         return parkingSlotManager.parkVehicleInSlot(vehicle);
     }
 
-    public void leaveCar(final int slotNumber) {
+    public void leaveVehicle(final int slotNumber) {
         parkingSlotManager.leaveSlot(slotNumber);
     }
 
