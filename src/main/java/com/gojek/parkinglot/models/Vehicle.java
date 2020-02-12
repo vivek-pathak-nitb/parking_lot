@@ -10,11 +10,11 @@ public abstract class Vehicle {
         this.color = color;
     }
 
-    protected String getRegistrationNumber() {
+    public String getRegistrationNumber() {
         return registrationNumber;
     }
 
-    protected String getColor() {
+    public String getColor() {
         return color;
     }
 
