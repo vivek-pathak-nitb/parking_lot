@@ -18,6 +18,10 @@ public class ParkingSlot {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public boolean isFree() {
         return isFree;
     }
@@ -26,15 +30,11 @@ public class ParkingSlot {
         return parkingId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setParkingId(int parkingId) {
+        this.parkingId = parkingId;
     }
 
     public void setIsFree(boolean isFree) {
         this.isFree = isFree;
-    }
-
-    public void setParkingId(int parkingId) {
-        this.parkingId = parkingId;
     }
 }

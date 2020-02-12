@@ -14,12 +14,12 @@ public abstract class Vehicle {
         return registrationNumber;
     }
 
-    public String getColor() {
-        return color;
-    }
-
     protected void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     protected void setColor(String color) {

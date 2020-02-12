@@ -2,7 +2,7 @@ package com.gojek.parkinglot.models;
 
 import java.util.Objects;
 
-public class Ticket {
+public class Ticket implements Comparable<Ticket> {
 
     private int slotNumber;
 
@@ -55,5 +55,11 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(getSlotNumber(), getRegistrationNumber(), getColor());
+    }
+
+    @Override
+    public int compareTo(Ticket that) {
+        Integer slotNumber = this.slotNumber;
+        return slotNumber.compareTo(that.slotNumber);
     }
 }

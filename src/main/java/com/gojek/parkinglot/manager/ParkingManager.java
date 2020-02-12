@@ -28,13 +28,18 @@ public class ParkingManager {
         final Parking parking = new Parking(id, level, parkingSlots);
         parkingList.add(parking);
 
-        System.out.println("Created parking lots with " + numberOfSlots + " slots.");
+        System.out.println("Created a parking lot with " + numberOfSlots + " slots");
 
         return parking;
     }
 
-    public Ticket parkVehicle(final Vehicle vehicle) throws NoSlotsAvailableException {
-        return parkingSlotManager.parkVehicleInSlot(vehicle);
+    public Ticket parkVehicle(final Vehicle vehicle) {
+        try {
+            return parkingSlotManager.parkVehicleInSlot(vehicle);
+        } catch (NoSlotsAvailableException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public void leaveVehicle(final int slotNumber) {

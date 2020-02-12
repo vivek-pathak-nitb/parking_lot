@@ -1,6 +1,5 @@
 package com.gojek.parkinglot.commands;
 
-import com.gojek.parkinglot.exceptions.NoSlotsAvailableException;
 import com.gojek.parkinglot.manager.ParkingManager;
 import com.gojek.parkinglot.models.Car;
 import com.gojek.parkinglot.models.CommandEnum;
@@ -24,14 +23,14 @@ public class CommandExecutorTest {
     }
 
     @Test
-    public void testExecute() throws NoSlotsAvailableException {
+    public void testExecute() {
         // Executing various commands
         commandExecutor.execute(CommandEnum.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR, DUMMY_DATA);
         commandExecutor.execute(CommandEnum.LEAVE, DUMMY_DATA);
         commandExecutor.execute(CommandEnum.PARK, DUMMY_DATA);
         commandExecutor.execute(CommandEnum.CREATE_PARKING_LOT, DUMMY_DATA);
-        commandExecutor.execute(CommandEnum.SLOT_NUMBERS_FOR_CARS_WITH_COLOR, DUMMY_DATA);
-        commandExecutor.execute(CommandEnum.SLOT_NUMBERS_FOR_REGISTRATION_NUMBER, DUMMY_DATA);
+        commandExecutor.execute(CommandEnum.SLOT_NUMBERS_FOR_CARS_WITH_COLOUR, DUMMY_DATA);
+        commandExecutor.execute(CommandEnum.SLOT_NUMBER_FOR_REGISTRATION_NUMBER, DUMMY_DATA);
         commandExecutor.execute(CommandEnum.STATUS, DUMMY_DATA);
 
         // verifying mocks

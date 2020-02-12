@@ -20,8 +20,16 @@ public class Parking {
         return level;
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public List<ParkingSlot> getParkingSlotList() {
         return parkingSlotList;
+    }
+
+    public void setParkingSlotList(List<ParkingSlot> parkingSlotList) {
+        this.parkingSlotList = parkingSlotList;
     }
 
     public int getId() {
@@ -30,13 +38,5 @@ public class Parking {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setParkingSlotList(List<ParkingSlot> parkingSlotList) {
-        this.parkingSlotList = parkingSlotList;
     }
 }

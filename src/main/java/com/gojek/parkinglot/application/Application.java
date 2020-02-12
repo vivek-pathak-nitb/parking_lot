@@ -1,7 +1,6 @@
 package com.gojek.parkinglot.application;
 
 import com.gojek.parkinglot.commands.CommandExecutor;
-import com.gojek.parkinglot.exceptions.NoSlotsAvailableException;
 import com.gojek.parkinglot.manager.ParkingManager;
 import com.gojek.parkinglot.manager.ParkingSlotManager;
 import com.gojek.parkinglot.models.CommandEnum;
@@ -15,7 +14,7 @@ import java.util.Scanner;
 
 public class Application {
 
-    public static void main(String[] args) throws IOException, NoSlotsAvailableException {
+    public static void main(String[] args) throws IOException {
         if (args.length != 0) {
             runProgramViaFile(args[0]);
         } else {
@@ -23,7 +22,7 @@ public class Application {
         }
     }
 
-    private static void runProgramViaFile(final String filePath) throws IOException, NoSlotsAvailableException {
+    private static void runProgramViaFile(final String filePath) throws IOException {
         final BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
         final CommandExecutor commandExecutor = new CommandExecutor(new ParkingManager(new ParkingSlotManager()));
@@ -32,7 +31,7 @@ public class Application {
         }
     }
 
-    private static void runProgramViaShell() throws NoSlotsAvailableException {
+    private static void runProgramViaShell() {
         final Scanner input = new Scanner(System.in);
         final CommandExecutor commandExecutor = new CommandExecutor(new ParkingManager(new ParkingSlotManager()));
         String line = input.nextLine();
@@ -43,7 +42,7 @@ public class Application {
     }
 
     private static void run(final String line,
-                            final CommandExecutor commandExecutor) throws NoSlotsAvailableException {
+                            final CommandExecutor commandExecutor) {
         final String[] lineContent = line.split(" ");
         final CommandEnum commandEnum = CommandEnum.valueOf(lineContent[0].toUpperCase());
         commandExecutor.execute(commandEnum, Arrays.copyOfRange(lineContent, 1, lineContent.length));

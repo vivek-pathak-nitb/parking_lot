@@ -1,6 +1,5 @@
 package com.gojek.parkinglot.manager;
 
-import com.gojek.parkinglot.exceptions.NoSlotsAvailableException;
 import com.gojek.parkinglot.models.Car;
 import com.gojek.parkinglot.models.Parking;
 import com.gojek.parkinglot.models.Ticket;
@@ -30,7 +29,7 @@ public class ParkingManagerTest {
     }
 
     @Test
-    public void parkVehicle() throws NoSlotsAvailableException {
+    public void parkVehicle() {
         // set up
         underTest.createParking(1, 2, 3);
         final Car car = new Car("123", "White");
