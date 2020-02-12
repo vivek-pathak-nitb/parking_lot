@@ -10,21 +10,42 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) throws IOException, NoSlotsAvailableException {
-        run(args[0]);
+        if (args.length != 0) {
+            runProgramViaFile(args[0]);
+        } else {
+            runProgramViaShell();
+        }
     }
 
-    private static void run(final String filePath) throws IOException, NoSlotsAvailableException {
+    private static void runProgramViaFile(final String filePath) throws IOException, NoSlotsAvailableException {
         final BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String line;
         final CommandExecutor commandExecutor = new CommandExecutor(new ParkingManager(new ParkingSlotManager()));
         while ((line = bufferedReader.readLine()) != null) {
-            final String[] lineContent = line.split(" ");
-            final CommandEnum commandEnum = CommandEnum.valueOf(lineContent[0].toUpperCase());
-            commandExecutor.execute(commandEnum, Arrays.copyOfRange(lineContent, 1, lineContent.length));
+            run(line, commandExecutor);
         }
+    }
+
+    private static void runProgramViaShell() throws NoSlotsAvailableException {
+        final Scanner input = new Scanner(System.in);
+        final CommandExecutor commandExecutor = new CommandExecutor(new ParkingManager(new ParkingSlotManager()));
+        String line = input.nextLine();
+        while (!Objects.equals("exit", line)) {
+            run(line, commandExecutor);
+            line = input.nextLine();
+        }
+    }
+
+    private static void run(final String line,
+                            final CommandExecutor commandExecutor) throws NoSlotsAvailableException {
+        final String[] lineContent = line.split(" ");
+        final CommandEnum commandEnum = CommandEnum.valueOf(lineContent[0].toUpperCase());
+        commandExecutor.execute(commandEnum, Arrays.copyOfRange(lineContent, 1, lineContent.length));
     }
 }
