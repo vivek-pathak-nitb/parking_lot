@@ -5,6 +5,7 @@ import com.gojek.parkinglot.models.Parking;
 import com.gojek.parkinglot.models.ParkingSlot;
 import com.gojek.parkinglot.models.Ticket;
 import com.gojek.parkinglot.models.Vehicle;
+import com.gojek.parkinglot.templates.OutputTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,9 @@ import java.util.List;
 public class ParkingManager {
 
     private final ParkingSlotManager parkingSlotManager;
-    private final List<Parking> parkingList;
 
     public ParkingManager(final ParkingSlotManager parkingSlotManager) {
         this.parkingSlotManager = parkingSlotManager;
-        parkingList = new ArrayList<>();
     }
 
     public Parking createParking(final int level, final int id, final int numberOfSlots) {
@@ -26,10 +25,7 @@ public class ParkingManager {
         }
 
         final Parking parking = new Parking(id, level, parkingSlots);
-        parkingList.add(parking);
-
-        System.out.println("Created a parking lot with " + numberOfSlots + " slots");
-
+        System.out.println(String.format(OutputTemplate.CREATED_PARKING_SLOT, numberOfSlots));
         return parking;
     }
 

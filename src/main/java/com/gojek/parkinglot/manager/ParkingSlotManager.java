@@ -4,6 +4,7 @@ import com.gojek.parkinglot.exceptions.NoSlotsAvailableException;
 import com.gojek.parkinglot.models.ParkingSlot;
 import com.gojek.parkinglot.models.Ticket;
 import com.gojek.parkinglot.models.Vehicle;
+import com.gojek.parkinglot.templates.OutputTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ParkingSlotManager {
     public Ticket parkVehicleInSlot(final Vehicle vehicle) throws NoSlotsAvailableException {
         final ParkingSlot parkingSlot = findFirstAvailableSlot();
         if (parkingSlot == null) {
-            throw new NoSlotsAvailableException("Sorry, parking lot is full");
+            throw new NoSlotsAvailableException(OutputTemplate.PARKING_LOT_FULL);
         }
 
         parkingSlot.setIsFree(false);
@@ -37,7 +38,7 @@ public class ParkingSlotManager {
         final Ticket ticket = new Ticket(parkingSlot.getId(), vehicle.getRegistrationNumber(), vehicle.getColor());
         ticketParkingSlotMap.put(ticket, parkingSlot);
 
-        System.out.println("Allocated slot number: " + ticket.getSlotNumber());
+        System.out.println(String.format(OutputTemplate.ALLOCATED_SLOT_NUMBER, ticket.getSlotNumber()));
         return ticket;
     }
 
@@ -51,7 +52,7 @@ public class ParkingSlotManager {
         final ParkingSlot parkingSlot = ticketParkingSlotMap.get(ticket);
         parkingSlot.setIsFree(true);
         ticketParkingSlotMap.remove(ticket);
-        System.out.println("Slot number " + ticket.getSlotNumber() + " is free");
+        System.out.println(String.format(OutputTemplate.SLOT_NUMBER_IS_FREE, ticket.getSlotNumber()));
     }
 
     public void printRegistrationNumberByColor(final String color) {
@@ -71,7 +72,7 @@ public class ParkingSlotManager {
                 return;
             }
         }
-        System.out.println("Not found");
+        System.out.println(OutputTemplate.NOT_FOUND);
     }
 
     public void printSlotNumberByColor(final String color) {
@@ -85,10 +86,10 @@ public class ParkingSlotManager {
     }
 
     public void printStatus() {
-        System.out.println("Slot No.    Registration No    Colour");
+        System.out.println(OutputTemplate.STATUS_HEADER);
         for (final Ticket ticket : ticketParkingSlotMap.keySet()) {
-            System.out.println(ticket.getSlotNumber() + "           " + ticket.getRegistrationNumber() + "      " +
-                    ticket.getColor());
+            System.out.println(String.format(OutputTemplate.STATUS_FORMAT, ticket.getSlotNumber(), ticket.getRegistrationNumber(),
+                    ticket.getColor()));
         }
     }
 
