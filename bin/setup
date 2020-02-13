@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
+
+#build project
 mvn clean install
+
+#run functional test cases
+cd functional_spec || exit
+bundle exec rake spec:functional
